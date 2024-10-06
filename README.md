@@ -10,6 +10,8 @@ _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clip
   <img src="https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/FullCircle.png" alt="MauiProgressView" width="45%" />
 </p>
 
+<a href="https://www.buymeacoffee.com/samirgc"><img src="https://img.buymeacoffee.com/button-api/?text=1 coffee fuels this project!&emoji=&slug=samirgc&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+
 ## Features
 
 - Display circular progress with full or partial ring options.
@@ -51,7 +53,17 @@ You can install the plugin via NuGet:
     </StackLayout>
 ```
 
-## MauiProgram.cs using .UseSkiaSharp()
+## Enable SkiaSharp in MauiProgram.cs
+To use SkiaSharp in your MAUI project, add the .UseSkiaSharp() line in your MauiProgram.cs file. You may also need to install the SkiaSharp.Views.Maui.Controls package via NuGet.
+
+Step 1: Add the Package
+Add the following package reference to your project file (.csproj):
+
+```xml
+<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+```
+Step 2: Update MauiProgram.cs
+Insert .UseSkiaSharp() in the CreateMauiApp() method, as shown below:
 
 ```csharp 
  public static MauiApp CreateMauiApp()

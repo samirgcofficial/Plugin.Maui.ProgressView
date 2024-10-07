@@ -5,10 +5,11 @@ The `Plugin.Maui.MauiProgressView` is a .NET MAUI plugin that provides customiza
 # Inspired from dribbble 
 _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share)_
 
-<p align="center">
+![MauiProgressView](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ArcCircle.png)
+![MauiProgressView](<p align="center">
   <img src="https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ArcCircle.png" alt="MauiProgressView" width="45%" />
   <img src="https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/FullCircle.png" alt="MauiProgressView" width="45%" />
-</p>
+</p>)
 
 <a href="https://www.buymeacoffee.com/samirgc"><img src="https://img.buymeacoffee.com/button-api/?text=1 coffee fuels this project!&emoji=&slug=samirgc&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
 
@@ -27,7 +28,7 @@ _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clip
 You can install the plugin via NuGet:
 
 ```sh
-   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.1 
+   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.2 
 ```
 
 
@@ -39,17 +40,19 @@ You can install the plugin via NuGet:
 ```xml
   <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <progress:ProgressRingView
-            CircleType="Full"
-            HeightRequest="280"
-            HorizontalOptions="Center"
-            IsThumbVisible="True"
-            Progress="{Binding Progress}"
-            RingColor="#4e8fee"
-            Thickness="80"
-            ThumbColor="#2c5c8a"
-            ThumbRadius="30"
-            VerticalOptions="Center"
-            WidthRequest="350" />
+                    CircleType="Arc"
+                    HeightRequest="280"
+                    HorizontalOptions="Center"
+                    IsThumbVisible="True"
+                    Maximum="1"
+                    Minimum="0"
+                    Progress="{Binding Progress}"
+                    RingColor="#4e8fee"
+                    Thickness="80"
+                    ThumbColor="#2c5c8a"
+                    ThumbRadius="30"
+                    VerticalOptions="Center"
+                    WidthRequest="350" />
     </StackLayout>
 ```
 

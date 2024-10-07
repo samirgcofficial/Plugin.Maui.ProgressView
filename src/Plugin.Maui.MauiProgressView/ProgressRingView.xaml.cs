@@ -44,6 +44,13 @@ public partial class ProgressRingView : ContentView
     // Bindable property for Thumb Radius
     public static readonly BindableProperty ThumbRadiusProperty =
         BindableProperty.Create(nameof(ThumbRadius), typeof(float), typeof(ProgressRingView), 10f, propertyChanged: OnProgressChanged);
+    // Bindable property for Minimum
+    public static readonly BindableProperty MinimumProperty =
+        BindableProperty.Create(nameof(Minimum), typeof(float), typeof(ProgressRingView), 0f, propertyChanged: OnProgressChanged);
+
+    // Bindable property for Maximum
+    public static readonly BindableProperty MaximumProperty =
+        BindableProperty.Create(nameof(Maximum), typeof(float), typeof(ProgressRingView), 100f, propertyChanged: OnProgressChanged);
 
     public float Progress
     {
@@ -79,6 +86,17 @@ public partial class ProgressRingView : ContentView
     {
         get => (float)GetValue(ThumbRadiusProperty);
         set => SetValue(ThumbRadiusProperty, value);
+    }
+    public float Minimum
+    {
+        get => (float)GetValue(MinimumProperty);
+        set => SetValue(MinimumProperty, value);
+    }
+
+    public float Maximum
+    {
+        get => (float)GetValue(MaximumProperty);
+        set => SetValue(MaximumProperty, value);
     }
 
     public ProgressRingView()
@@ -143,15 +161,21 @@ public partial class ProgressRingView : ContentView
     }
     private void DrawProgress(SKCanvas canvas, SKPoint center, float radius)
     {
-        // Calculate the sweep angle based on the circle type
+        // Ensure progress is within bounds of minimum and maximum
+        float normalizedProgress = (Progress - Minimum) / (Maximum - Minimum);
+
+        // Clamp the normalized progress between 0 and 1
+        normalizedProgress = Math.Max(0, Math.Min(normalizedProgress, 1));
+
+        // Calculate the sweep angle based on the circle type and normalized progress
         float sweepAngle;
         if (CircleType == CircleType.Full)
         {
-            sweepAngle = 360 * Progress;  // Full circle from 0 to 360 degrees
+            sweepAngle = 360 * normalizedProgress;  // Full circle from 0 to 360 degrees
         }
         else // Arc case
         {
-            sweepAngle = 180 * Progress;
+            sweepAngle = 180 * normalizedProgress;  // Arc from 0 to 180 degrees
         }
 
         var progressPaint = new SKPaint
@@ -171,14 +195,12 @@ public partial class ProgressRingView : ContentView
             }
             else if (CircleType == CircleType.Arc)
             {
-                // For arc, start from 0 degrees (which is -90 in SkiaSharp coordinates)
                 path.AddArc(new SKRect(center.X - radius, center.Y - radius, center.X + radius, center.Y + radius), 180, sweepAngle);
             }
 
             canvas.DrawPath(path, progressPaint);
         }
     }
-
 
     private void DrawThumb(SKCanvas canvas, SKPoint center, float radius)
     {
@@ -196,8 +218,11 @@ public partial class ProgressRingView : ContentView
 
     private SKPoint GetThumbPosition(SKPoint center, float radius)
     {
-        // Calculate the sweep angle based on the circle type
-        float sweepAngle = CircleType == CircleType.Full ? 360 * Progress : 180 * Progress;
+        // Normalize the progress to a 0-1 range based on Minimum and Maximum
+        float normalizedProgress = (Progress - Minimum) / (Maximum - Minimum);
+
+        // Calculate the sweep angle
+        float sweepAngle = CircleType == CircleType.Full ? 360 * normalizedProgress : 180 * normalizedProgress;
 
         // Adjust the angle based on the circle type
         float adjustedAngle = CircleType == CircleType.Full

@@ -12,10 +12,12 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
                 <progress:ProgressRingView
-                    CircleType="Arc"
+                    CircleType="Full"
                     HeightRequest="280"
                     HorizontalOptions="Center"
                     IsThumbVisible="True"
+                    Maximum="1"
+                    Minimum="0"
                     Progress="{Binding Progress}"
                     RingColor="#4e8fee"
                     Thickness="80"

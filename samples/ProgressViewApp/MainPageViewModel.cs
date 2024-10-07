@@ -55,7 +55,12 @@ namespace ProgressViewApp
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+
+        public MainPageViewModel()
+        {
+            Progress = 0.6f; // extends from 0 to 1
+        }
+            protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

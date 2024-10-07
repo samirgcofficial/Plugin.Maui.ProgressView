@@ -5,9 +5,10 @@ The `Plugin.Maui.MauiProgressView` is a .NET MAUI plugin that provides customiza
 # Inspired from dribbble 
 _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share)_
 
-![MauiProgressView](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ArcCircle.png)
-  
- ![MauiProgressView](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/FullCircle.png)
+| ![ArcCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ArcCircle.png) | ![FullCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/FullCircle.png) |
+|:--:|:--:|
+| Arc Circle | Full Circle |
+
 
 
 <a href="https://www.buymeacoffee.com/samirgc"><img src="https://img.buymeacoffee.com/button-api/?text=1 coffee fuels this project!&emoji=&slug=samirgc&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>

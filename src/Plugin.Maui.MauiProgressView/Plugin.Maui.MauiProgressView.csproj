@@ -55,6 +55,9 @@
 		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="ProgressBarView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="ProgressRingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

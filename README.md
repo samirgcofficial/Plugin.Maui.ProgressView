@@ -1,22 +1,37 @@
-# Plugin.Maui.MauiProgressView
+﻿# Plugin.Maui.MauiProgressView
 
 The `Plugin.Maui.MauiProgressView` is a .NET MAUI plugin that provides customizable progress bars for use in mobile applications. This component allows users to display progress in a visually appealing circular format, with additional features such as a thumb indicator and customizable colors.
 
 # Inspired from dribbble 
 _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=agungmahendra15&utm_content=Attendance%20App&utm_medium=Social_Share)_
 
-| ![ArcCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ArcCircle.png) | ![FullCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/FullCircle.png) |
+## Progress Views
+
+### Progress Ring View
+
+The `Progress Ring View` offers two different types of circular progress displays:
+
+| ![ArcCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ProgressRingViewArc.gif) | ![FullCircle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/ProgressRingViewFullCircle.gif) |
 |:--:|:--:|
-| Arc Circle | Full Circle |
+| **Arc Circle** | **Full Circle** |
+
+### Progress Bar View
+
+The `Progress Bar View` supports multiple types of progress displays:
+
+- **Bar**  
+
+|![Bar](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/Progressbarviewbar.gif)|
+|:--:|
+|**Bar** |
 
 
+### ☕️ Fuel the Development with a Coffee!
 
-<a href="https://www.buymeacoffee.com/samirgc"><img src="https://img.buymeacoffee.com/button-api/?text=1 coffee fuels this project!&emoji=&slug=samirgc&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+If you find this plugin helpful and want to support its continuous development, consider [buying me a coffee](https://www.buymeacoffee.com/samirgc)! Your support means a lot and helps keep the project alive and growing. Every cup of coffee boosts my productivity and fuels new features and improvements.
 
-## Features
+Thank you for your support! 🙌
 
-- Display circular progress with full or partial ring options.
-- Properties Supported as of V1 CircleType, Ring Color, Thumb Color,ThumbRadius, Thickness, and IsThumbVisible.
 
 ## Getting Started
 
@@ -28,7 +43,7 @@ _Refer [here](https://dribbble.com/shots/19500244-Attendance-App?utm_source=Clip
 You can install the plugin via NuGet:
 
 ```sh
-   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.2 
+   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.3 
 ```
 
 
@@ -38,7 +53,7 @@ You can install the plugin via NuGet:
  ```
 
 ```xml
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+  <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <progress:ProgressRingView
                     CircleType="Arc"
                     HeightRequest="280"
@@ -53,7 +68,20 @@ You can install the plugin via NuGet:
                     ThumbRadius="30"
                     VerticalOptions="Center"
                     WidthRequest="350" />
-    </StackLayout>
+    
+      <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="25"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="2"
+                    Progress="{Binding Progress, Mode=TwoWay}"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Bar" />
+   </VerticalStackLayout>
 ```
 
 ## Enable SkiaSharp in MauiProgram.cs

@@ -60,7 +60,11 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Plugin.Maui.MauiProgressView" Version="0.0.2" />
+		<!--<PackageReference Include="Plugin.Maui.MauiProgressView" Version="0.0.2" />-->
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Plugin.Maui.MauiProgressView\Plugin.Maui.MauiProgressView.csproj" />
 	</ItemGroup>
 
 

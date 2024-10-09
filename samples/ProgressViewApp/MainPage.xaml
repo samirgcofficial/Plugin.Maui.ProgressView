@@ -6,31 +6,46 @@
     xmlns:progress="clr-namespace:Plugin.Maui.MauiProgressView;assembly=Plugin.Maui.MauiProgressView">
 
     <ScrollView>
-        <VerticalStackLayout Padding="10,0" VerticalOptions="Center">
+        <VerticalStackLayout Padding="10,0" VerticalOptions="Start">
             <VerticalStackLayout
                 Padding="5"
                 HorizontalOptions="Center"
-                VerticalOptions="Center">
+                Spacing="20"
+                VerticalOptions="Start">
+                <Slider
+                    Maximum="1"
+                    Minimum="0"
+                    WidthRequest="200"
+                    Value="{Binding Progress}" />
                 <progress:ProgressRingView
-                    CircleType="Full"
+                    Margin="0,30,0,0"
+                    CircleType="Arc"
                     HeightRequest="280"
                     HorizontalOptions="Center"
                     IsThumbVisible="True"
                     Maximum="1"
                     Minimum="0"
-                    Progress="{Binding Progress}"
+                    Progress="{Binding Progress, Mode=TwoWay}"
                     RingColor="#4e8fee"
                     Thickness="80"
                     ThumbColor="#2c5c8a"
                     ThumbRadius="30"
                     VerticalOptions="Center"
                     WidthRequest="350" />
+                <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="25"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="2"
+                    Progress="{Binding Progress, Mode=TwoWay}"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Bar" />
             </VerticalStackLayout>
-            <Slider
-                Maximum="1"
-                Minimum="0"
-                WidthRequest="200"
-                Value="{Binding Progress}" />
+
 
             <!--  Label to display the progress percentage  -->
             <Label

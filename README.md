@@ -28,7 +28,7 @@ The `Progress Bar View` supports multiple types of progress displays:
 
 ### ☕️ Fuel the Development with a Coffee!
 
-If you find this plugin helpful and want to support its continuous development, consider [buying me a coffee](https://www.buymeacoffee.com/samirgc)! Your support means a lot and helps keep the project alive and growing. Every cup of coffee boosts my productivity and fuels new features and improvements.
+If you find this plugin helpful and want to support its continuous development, consider [buying me a coffee](https://www.buymeacoffee.com/samirgc)! Your support means a lot and helps keep the project alive and growing. Every cup of coffee boosts my productivity and fuels new features and improvements. <a href="https://www.buymeacoffee.com/samirgc" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 Thank you for your support! 🙌
 

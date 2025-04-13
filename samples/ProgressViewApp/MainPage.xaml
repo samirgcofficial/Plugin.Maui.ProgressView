@@ -18,20 +18,20 @@
                     WidthRequest="200"
                     Value="{Binding Progress}" />
                 <progress:ProgressRingView
-                    Margin="0,30,0,0"
                     CircleType="Arc"
                     HeightRequest="280"
                     HorizontalOptions="Center"
                     IsThumbVisible="True"
                     Maximum="1"
                     Minimum="0"
-                    Progress="{Binding Progress, Mode=TwoWay}"
+                    Progress="{Binding Progress}"
                     RingColor="#4e8fee"
                     Thickness="80"
                     ThumbColor="#2c5c8a"
                     ThumbRadius="30"
                     VerticalOptions="Center"
                     WidthRequest="350" />
+
                 <progress:ProgressBarView
                     BarHeight="50"
                     CornerRadius="25"
@@ -44,22 +44,71 @@
                     Progress="{Binding Progress, Mode=TwoWay}"
                     ProgressColor="CornflowerBlue"
                     ProgressType="Bar" />
+
+                <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Circle" />
+
+                <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Segmented" />
+
+                <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Striped" />
+
+                <progress:CylinderProgressBarView
+                    BottomRectColor="Gray"
+                    FillColor="CornflowerBlue"
+                    HeightRequest="290"
+                    IsBottomRectVisible="True"
+                    Maximum="1"
+                    Minimum="0"
+                    Orientation="Vertical"
+                    Progress="0.9"
+                    TubeColor="LightGrey"
+                    TubeCornerRadius="5" />
+                <!--  Label to display the progress percentage  -->
+                <Label
+                    HorizontalOptions="Center"
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="{Binding Progress, StringFormat='{0:P0}'}"
+                    VerticalOptions="Center" />
+
+                <Button
+                    x:Name="CounterBtn"
+                    HorizontalOptions="Fill"
+                    SemanticProperties.Hint="Counts the number of times you click"
+                    Text="Click me" />
             </VerticalStackLayout>
-
-
-            <!--  Label to display the progress percentage  -->
-            <Label
-                HorizontalOptions="Center"
-                SemanticProperties.HeadingLevel="Level1"
-                Style="{StaticResource Headline}"
-                Text="{Binding Progress, StringFormat='{0:P0}'}"
-                VerticalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                HorizontalOptions="Fill"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Text="Click me" />
         </VerticalStackLayout>
     </ScrollView>
 

@@ -130,7 +130,7 @@ You can install the plugin via NuGet:
                     Outline="True"
                     OutlineColor="LightGray"
                     OutlineThickness="10"
-                    Progress="0.9"
+                    Progress="0.4"
                     ProgressColor="CornflowerBlue"
                     ProgressType="Segmented" />
 
@@ -143,7 +143,7 @@ You can install the plugin via NuGet:
                     Outline="True"
                     OutlineColor="LightGray"
                     OutlineThickness="10"
-                    Progress="0.9"
+                    Progress="0.6"
                     ProgressColor="CornflowerBlue"
                     ProgressType="Striped" />
 

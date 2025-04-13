@@ -17,18 +17,47 @@ namespace Plugin.Maui.MauiProgressView;
             set => SetValue(OrientationProperty, value);
         }
 
-        // Bindable property for Progress
-        public static readonly BindableProperty ProgressProperty =
+
+    // Bindable property for Minimum
+    public static readonly BindableProperty MinimumProperty =
+        BindableProperty.Create(nameof(Minimum), typeof(float), typeof(CylinderProgressBarView), 0f, propertyChanged: OnProgressChanged);
+
+    // Bindable property for Maximum
+    public static readonly BindableProperty MaximumProperty =
+        BindableProperty.Create(nameof(Maximum), typeof(float), typeof(CylinderProgressBarView), 100f, propertyChanged: OnProgressChanged);
+
+    public float Minimum
+    {
+        get => (float)GetValue(MinimumProperty);
+        set => SetValue(MinimumProperty, value);
+    }
+
+    public float Maximum
+    {
+        get => (float)GetValue(MaximumProperty);
+        set => SetValue(MaximumProperty, value);
+    }
+
+
+
+
+    // Bindable property for Progress
+    public static readonly BindableProperty ProgressProperty =
             BindableProperty.Create(nameof(Progress), typeof(float), typeof(CylinderProgressBarView), 0f, propertyChanged: OnProgressChanged);
 
-        public float Progress
+    public float Progress
+    {
+        get => (float)GetValue(ProgressProperty);
+        set
         {
-            get => (float)GetValue(ProgressProperty);
-            set => SetValue(ProgressProperty, value);
+            float clamped = Math.Clamp(value, Minimum, Maximum);
+            SetValue(ProgressProperty, clamped);
         }
+    }
 
-        // Bindable property for Tube Color
-        public static readonly BindableProperty TubeColorProperty =
+
+    // Bindable property for Tube Color
+    public static readonly BindableProperty TubeColorProperty =
             BindableProperty.Create(nameof(TubeColor), typeof(Color), typeof(CylinderProgressBarView), Colors.LightBlue);
 
         public Color TubeColor
@@ -171,7 +200,7 @@ namespace Plugin.Maui.MauiProgressView;
             }
 
             // Draw the wave effect above the fill
-            DrawWaterWave(canvas, fillRect, filledHeight, tubeX, tubeWidth);
+          //  DrawWaterWave(canvas, fillRect, filledHeight, tubeX, tubeWidth);
 
             // Draw the bottom of the test tube only if visible
             if (IsBottomRectVisible)

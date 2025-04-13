@@ -2,10 +2,12 @@ using SkiaSharp;
 using SkiaSharp.Views.Maui;
 
 namespace Plugin.Maui.MauiProgressView;
-
 public enum ProgressType
 {
-    Bar
+    Circle,
+    Bar,
+    Segmented,
+    Striped
 }
 
 public partial class ProgressBarView : ContentView
@@ -61,41 +63,26 @@ public partial class ProgressBarView : ContentView
         typeof(Color),
         typeof(ProgressBarView),
         Colors.Black); // Default outline color
-
     public static readonly BindableProperty MinimumProperty = BindableProperty.Create(
     nameof(Minimum),
     typeof(double),
     typeof(ProgressBarView),
-    0.0, // Default minimum value
+    0.0,
     propertyChanged: OnProgressChanged);
 
     public static readonly BindableProperty MaximumProperty = BindableProperty.Create(
         nameof(Maximum),
         typeof(double),
         typeof(ProgressBarView),
-        100.0, // Default maximum value
+        100.0,
         propertyChanged: OnProgressChanged);
 
-    // Properties for Minimum and Maximum
-    public double Minimum
-    {
-        get => (double)GetValue(MinimumProperty);
-        set => SetValue(MinimumProperty, value);
-    }
-
-    public double Maximum
-    {
-        get => (double)GetValue(MaximumProperty);
-        set => SetValue(MaximumProperty, value);
-    }
-
-
     // Properties...
-    public double Progress
-    {
-        get => (double)GetValue(ProgressProperty);
-        set => SetValue(ProgressProperty, value);
-    }
+    //public double Progress
+    //{
+    //    get => (double)GetValue(ProgressProperty);
+    //    set => SetValue(ProgressProperty, value);
+    //}
 
     public float CornerRadius
     {
@@ -152,6 +139,32 @@ public partial class ProgressBarView : ContentView
         set => SetValue(OutlineThicknessProperty, value);
     }
 
+
+    public double Minimum
+    {
+        get => (double)GetValue(MinimumProperty);
+        set => SetValue(MinimumProperty, value);
+    }
+
+    public double Maximum
+    {
+        get => (double)GetValue(MaximumProperty);
+        set => SetValue(MaximumProperty, value);
+    }
+
+    public double Progress
+    {
+        get => (double)GetValue(ProgressProperty);
+        set
+        {
+            // Clamp the progress between Minimum and Maximum
+            double clamped = Math.Max(Minimum, Math.Min(Maximum, value));
+            SetValue(ProgressProperty, clamped);
+        }
+    }
+
+
+
     public ProgressBarView()
     {
         InitializeComponent();
@@ -160,15 +173,8 @@ public partial class ProgressBarView : ContentView
     private static void OnProgressChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (ProgressBarView)bindable;
-        double progress = (double)newValue;
-
-        // Clamp progress between Minimum and Maximum using Math.Clamp
-        control.Progress = Math.Clamp(progress, control.Minimum, control.Maximum);
-
         control.canvasView.InvalidateSurface();
     }
-
-
 
     private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
@@ -183,13 +189,20 @@ public partial class ProgressBarView : ContentView
             case ProgressType.Bar:
                 DrawProgressBar(canvas, width, height);
                 break;
+            case ProgressType.Circle:
+                DrawCircleProgress(canvas, width, height);
+                break;
+            case ProgressType.Segmented:
+                DrawSegmentedProgress(canvas, width, height);
+                break;
+            case ProgressType.Striped:
+                DrawStripedProgress(canvas, width, height);
+                break;
         }
     }
+
     private void DrawProgressBar(SKCanvas canvas, float width, float height)
     {
-        // Normalize progress between Minimum and Maximum
-        double normalizedProgress = (Progress - Minimum) / (Maximum - Minimum);
-
         // Draw the background bar
         using (var paint = new SKPaint())
         {
@@ -210,7 +223,7 @@ public partial class ProgressBarView : ContentView
             paint.StrokeCap = SKStrokeCap.Round;
             paint.Style = SKPaintStyle.Fill;
 
-            float progressWidth = (float)normalizedProgress * width;
+            float progressWidth = (float)Progress * width;
             var progressRect = new SKRect(0, height / 2 - BarHeight / 2, progressWidth, height / 2 + BarHeight / 2);
             canvas.DrawRoundRect(progressRect, CornerRadius, CornerRadius, paint);
         }
@@ -229,7 +242,125 @@ public partial class ProgressBarView : ContentView
                 canvas.DrawRoundRect(outlineRect, CornerRadius, CornerRadius, outlinePaint);
             }
         }
+
     }
 
+    private void DrawCircleProgress(SKCanvas canvas, float width, float height)
+    {
+        float radius = Math.Min(width, height) / 2 - 10;
+        float centerX = width / 2;
+        float centerY = height / 2;
 
+        using (var paint = new SKPaint())
+        {
+            paint.Color = SKColors.LightGray;
+            paint.IsAntialias = true;
+            paint.Style = SKPaintStyle.Fill;
+            canvas.DrawCircle(centerX, centerY, radius, paint);
+        }
+
+        using (var paint = new SKPaint())
+        {
+            paint.Color = ProgressColor.ToSKColor();
+            paint.IsAntialias = true;
+            paint.Style = SKPaintStyle.Fill;
+            float progressRadius = radius * (float)Progress;
+            canvas.DrawCircle(centerX, centerY, progressRadius, paint);
+        }
+        // Draw the outline if enabled
+        if (Outline)
+        {
+            using (var outlinePaint = new SKPaint())
+            {
+                outlinePaint.Color = OutlineColor.ToSKColor();
+                outlinePaint.IsAntialias = true;
+                outlinePaint.Style = SKPaintStyle.Stroke;
+                outlinePaint.StrokeWidth = OutlineThickness; // Use OutlineThickness
+                canvas.DrawCircle(centerX, centerY, radius, outlinePaint);
+            }
+        }
+
+    }
+
+    private void DrawSegmentedProgress(SKCanvas canvas, float width, float height)
+    {
+        float segmentWidth = width / SegmentCount;
+        float radius = Math.Min(segmentWidth, height) / 2 - 5;
+        float centerY = height / 2;
+
+        for (int i = 0; i < SegmentCount; i++)
+        {
+            using (var paint = new SKPaint())
+            {
+                paint.Color = (i < Progress * SegmentCount) ? ProgressColor.ToSKColor() : SKColors.LightGray;
+                paint.IsAntialias = true;
+                paint.Style = SKPaintStyle.Fill;
+
+                float centerX = segmentWidth * i + segmentWidth / 2;
+                canvas.DrawCircle(centerX, centerY, radius, paint);
+            }
+
+            // Draw the outline if enabled
+            if (Outline)
+            {
+                using (var outlinePaint = new SKPaint())
+                {
+                    outlinePaint.Color = OutlineColor.ToSKColor();
+                    outlinePaint.IsAntialias = true;
+                    outlinePaint.Style = SKPaintStyle.Stroke;
+                    outlinePaint.StrokeWidth = OutlineThickness; // Use OutlineThickness
+
+                    float centerX = segmentWidth * i + segmentWidth / 2;
+                    canvas.DrawCircle(centerX, centerY, radius, outlinePaint);
+                }
+            }
+
+        }
+    }
+
+    private void DrawStripedProgress(SKCanvas canvas, float width, float height)
+    {
+        float stripeWidth = 10f;
+        float progressWidth = (float)Progress * width;
+
+        using (var paint = new SKPaint())
+        {
+            paint.Color = SKColors.LightGray;
+            paint.IsAntialias = true;
+            paint.Style = SKPaintStyle.Fill;
+
+            var rect = new SKRect(0, height / 2 - BarHeight / 2, width, height / 2 + BarHeight / 2);
+            canvas.DrawRoundRect(rect, CornerRadius, CornerRadius, paint);
+        }
+
+        using (var paint = new SKPaint())
+        {
+            paint.Color = ProgressColor.ToSKColor();
+            paint.IsAntialias = true;
+            paint.Style = SKPaintStyle.Fill;
+
+            for (float x = 0; x < progressWidth; x += stripeWidth * 2)
+            {
+                var stripeRect = new SKRect(x, height / 2 - BarHeight / 2, x + stripeWidth, height / 2 + BarHeight / 2);
+                canvas.DrawRect(stripeRect, paint);
+            }
+        }
+
+        // Draw the outline if enabled
+        if (Outline)
+        {
+            using (var outlinePaint = new SKPaint())
+            {
+                outlinePaint.Color = OutlineColor.ToSKColor();
+                outlinePaint.IsAntialias = true;
+                outlinePaint.Style = SKPaintStyle.Stroke;
+                outlinePaint.StrokeWidth = OutlineThickness; // Use OutlineThickness
+
+                var outlineRect = new SKRect(0, height / 2 - BarHeight / 2, width, height / 2 + BarHeight / 2);
+                canvas.DrawRoundRect(outlineRect, CornerRadius, CornerRadius, outlinePaint);
+            }
+        }
+
+    }
 }
+

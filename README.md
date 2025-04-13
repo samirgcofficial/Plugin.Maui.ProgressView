@@ -25,6 +25,32 @@ The `Progress Bar View` supports multiple types of progress displays:
 |:--:|
 |**Bar** |
 
+- **Circle**  
+
+|![Circle](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/CircleProgress.gif)|
+|:--:|
+|**Circle** |
+
+- **Segmented**  
+
+|![Segmented](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/SegmentedProgress.gif)|
+|:--:|
+|**Segmented** |
+
+- **Striped**  
+
+|![Striped](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/StripedProgress.gif)|
+|:--:|
+|**Striped** |
+
+### Cylinder Progress View
+
+- **Tube**  
+
+|![Tube](https://raw.githubusercontent.com/samirgcofficial/Plugin.Maui.ProgressView/main/Images/CylindricalProgress.gif)|
+|:--:|
+|**Tube** |
+
 
 ### ☕️ Fuel the Development with a Coffee!
 
@@ -43,7 +69,7 @@ Thank you for your support! 🙌
 You can install the plugin via NuGet:
 
 ```sh
-   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.3 
+   dotnet add package Plugin.Maui.MauiProgressView --version 0.0.4 
 ```
 
 
@@ -68,7 +94,7 @@ You can install the plugin via NuGet:
                     ThumbRadius="30"
                     VerticalOptions="Center"
                     WidthRequest="350" />
-    
+
       <progress:ProgressBarView
                     BarHeight="50"
                     CornerRadius="25"
@@ -81,6 +107,57 @@ You can install the plugin via NuGet:
                     Progress="{Binding Progress, Mode=TwoWay}"
                     ProgressColor="CornflowerBlue"
                     ProgressType="Bar" />
+
+       <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Circle" />
+
+        <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Segmented" />
+
+        <progress:ProgressBarView
+                    BarHeight="50"
+                    CornerRadius="0"
+                    HeightRequest="120"
+                    Maximum="1"
+                    Minimum="0"
+                    Outline="True"
+                    OutlineColor="LightGray"
+                    OutlineThickness="10"
+                    Progress="0.9"
+                    ProgressColor="CornflowerBlue"
+                    ProgressType="Striped" />
+
+       <progress:CylinderProgressBarView
+                    BottomRectColor="Gray"
+                    FillColor="CornflowerBlue"
+                    HeightRequest="290"
+                    IsBottomRectVisible="True"
+                    Maximum="1"
+                    Minimum="0"
+                    Orientation="Vertical"
+                    Progress="0.9"
+                    TubeColor="LightGrey"
+                    TubeCornerRadius="5" />
    </VerticalStackLayout>
 ```
 
